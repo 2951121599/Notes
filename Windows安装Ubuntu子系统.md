@@ -76,6 +76,8 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 sudo apt install zsh
 ```
 
+
+
 ### Linux换源
 
 ```shell
