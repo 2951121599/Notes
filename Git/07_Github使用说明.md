@@ -352,3 +352,10 @@ Forking 工作流，也就是先把仓库Fork到个人账号，（为了避免�
   git pull --ff upstream main
   ```
 
+### 7.9 文章推荐: 关键词介绍
+
+文章推荐 [细读 Git | 让你弄懂 origin、HEAD、FETCH_HEAD 相关内容 - 简书](https://www.jianshu.com/p/b494ee197ea8)
+
+fetch 取
+
+origin 远程仓库url的别名

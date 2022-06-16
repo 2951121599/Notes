@@ -16,7 +16,7 @@ Git 支持多种数据传输协议。 https:// 协议，git:// 协议，SSH 协�
 - 向远程仓库推送（push）文件
 - 从远程仓库拉取（pull）文件
 
-### 先聊聊Git设计
+### 2.0.1 Git的设计
 
 <img src="images/Git_design.png" style="zoom: 67%;" />
 
@@ -413,3 +413,6 @@ git config --global alias.unstage 'reset HEAD --'
 # 查看最后一次提交 git last
 git config --global alias.last 'log -1 HEAD'
 ```
+
+文章推荐 [细读 Git | 让你弄懂 origin、HEAD、FETCH_HEAD 相关内容 - 简书](https://www.jianshu.com/p/b494ee197ea8)
+
