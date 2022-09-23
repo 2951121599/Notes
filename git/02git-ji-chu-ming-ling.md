@@ -1,47 +1,44 @@
-# 02_Git基础命令
+# 02\_Git基础命令
 
-[TOC]
+\[TOC]
 
 ## 2.0 前言
+
 因个人在日常办公中使用Github Desktop，都是点点点的操作，对一些原始的Git命令有些生疏，特此来复习复习。
 
 Git 支持多种数据传输协议。 https:// 协议，git:// 协议，SSH 协议
 
-- 配置并初始化一个仓库（repository）
-- 开始或停止跟踪（track）文件
-- 暂存（stage）或提交（commit）更改
-- 配置 Git 来忽略指定的文件和文件模式
-- 撤销错误操作
-- 浏览项目的历史版本以及不同提交（commits）之间的差异
-- 向远程仓库推送（push）文件
-- 从远程仓库拉取（pull）文件
+* 配置并初始化一个仓库（repository）
+* 开始或停止跟踪（track）文件
+* 暂存（stage）或提交（commit）更改
+* 配置 Git 来忽略指定的文件和文件模式
+* 撤销错误操作
+* 浏览项目的历史版本以及不同提交（commits）之间的差异
+* 向远程仓库推送（push）文件
+* 从远程仓库拉取（pull）文件
 
 ### 2.0.1 Git的设计
 
-<img src="images/Git_design.png" style="zoom: 67%;" />
+![](../Git/images/Git\_design.png)
 
 Git 是一个分布式的版本控制工具，因此远程和本地可以视为两个独立的 Git 仓库。上图（来自维基百科）是一张经典的 Git 中的数据流与存储级别的介绍，其中储存级别主要包含几部分：
 
-- 工作区 (Working Files)，指的是我们时刻在编辑的文件的目录，通常来说我们修改文件都是在工作区体现的
-- 暂存区（Stage），暂存将本地的修改，然后提交到本地仓库
-- 本地仓库（Local）
-- 远程仓库（Remote）
+* 工作区 (Working Files)，指的是我们时刻在编辑的文件的目录，通常来说我们修改文件都是在工作区体现的
+* 暂存区（Stage），暂存将本地的修改，然后提交到本地仓库
+* 本地仓库（Local）
+* 远程仓库（Remote）
 
 由此不难看出整体的数据流动，就是一条从：**工作区 -> 暂存区 -> 本地仓库 -> 远程仓库** 的双向数据流通道。
 
+![](../Git/images/git\_draw.png)
 
-
-<img src="images/git_draw.png" style="zoom: 80%;" />
-
-![](images/git_flow.png)
-
-
+![](../Git/images/git\_flow.png)
 
 ## 2.1 获取 Git 仓库的方式
 
 ### 2.1.1 本地目录转为 Git 仓库
 
-```shell 
+```shell
 # 进入到对应的项目目录里（在已存在目录中初始化仓库）
 git init
 ```
@@ -62,7 +59,6 @@ git clone https://github.com/libgit2/libgit2
 git clone https://github.com/libgit2/libgit2 mylibgit
 ```
 
-
 ## 2.2 记录每次更新到仓库
 
 Git仓库文件的两种状态：**已跟踪 或 未跟踪**
@@ -75,10 +71,8 @@ Git仓库文件的两种状态：**已跟踪 或 未跟踪**
 
 ![Git 下文件的状态变化周期图](https://user-images.githubusercontent.com/62437804/166645345-fa590f8a-9259-47b3-b5b3-048996014521.png)
 
-
-
-
 ### 2.2.1 检查当前文件状态
+
 ```shell
 # 检查当前文件状态
 git status
@@ -100,8 +94,6 @@ git status 命令的输出十分详细，但其用语有些繁琐。
 git status -s 或 git status --short ，输出的格式为紧凑型
 ```
 
-
-
 ### 2.2.2 跟踪新文件
 
 ```shell
@@ -119,9 +111,7 @@ Changes to be committed:
 # git add 命令 使用文件或目录的路径作为参数，如果参数是目录的路径，将跟踪该目录下的所有文件。
 ```
 
-
-
-###  2.2.3 暂存已修改的文件
+### 2.2.3 暂存已修改的文件
 
 ```shell
 # 修改一个已被跟踪的文件 状态有M，内容发生了变化，需要重新运行 git add CONTRIBUTING.md
@@ -132,6 +122,7 @@ A  README.md
 # git add 可以用它开始跟踪新文件，或者把已跟踪的文件放到暂存区，还能用于合并时把有冲突的文件标记为已解决状态等
 # 将这个命令理解为 “精确地将内容添加到下一次提交中” 而不是 “将一个文件添加到项目中” 要更加合适
 ```
+
 ```shell
 # 重新运行 git add CONTRIBUTING.md，将其放到暂存区
 git add CONTRIBUTING.md
@@ -141,6 +132,7 @@ A  README.md
 
 # 现在两个文件都已暂存，下次提交时就会一并记录到仓库
 ```
+
 ```shell
 # 新添加的未跟踪文件前面有 ?? 标记
 # 修改过的文件前面有 M 标记
@@ -151,9 +143,7 @@ A  README.md
 ?? LICENSE.txt
 ```
 
-
-
-###  2.2.4 忽略文件
+### 2.2.4 忽略文件
 
 ```shell
 # 查看仓库的 .gitignore 文件
@@ -179,6 +169,7 @@ doc/**/*.pdf
 # 注意：在根目录和子目录都可以有 .gitignore 文件
 # 详细文档：https://github.com/github/gitignore
 ```
+
 ```shell
 # 文件 .gitignore 的格式规范如下：
 
@@ -194,17 +185,15 @@ doc/**/*.pdf
 如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有0到9的数字）
 ```
 
+### 2.2.5 查看已/未暂存暂存的修改
 
-
-###  2.2.5 查看已/未暂存暂存的修改
 ```shell
 # 显示哪些行发生了改变
 git diff
 ```
 
+### 2.2.6 提交更新
 
-
-###  2.2.6 提交更新
 ```shell
 # 启动你选择的文本编辑器来输入提交说明
 git commit
@@ -213,18 +202,14 @@ git commit
 # 每一次运行提交操作，都是对你项目作一次快照，以后可以回到这个状态，或者进行比较。
 ```
 
-
-
-###  2.2.7 跳过使用暂存区域
+### 2.2.7 跳过使用暂存区域
 
 ```shell
 # 使用暂存区域略显繁琐，加上 -a 选项，跳过使用暂存区域
 git commit -a -m 'added new benchmarks'
 ```
 
-
-
-###  2.2.8 移除文件
+### 2.2.8 移除文件
 
 ```shell
 # 从暂存区域移除，再从工作目录中删除
@@ -243,17 +228,13 @@ git rm log/\*.log
 git rm \*~
 ```
 
-
-
-###  2.2.9 移动文件/更名
+### 2.2.9 移动文件/更名
 
 ```shell
 # git mv <path 文件的当前路径> <target_path 文件的目标路径>
 # 命令可以将一个文件或者目录移动到另一处，或者实现更名
 git mv README.md README
 ```
-
-
 
 ## 2.3 查看提交历史
 
@@ -267,8 +248,6 @@ git log -p -2
 # --stat 选项：提交的简略统计信息
 git log --stat
 ```
-
-
 
 ## 2.4 撤消操作
 
@@ -284,27 +263,22 @@ git checkout -- CONTRIBUTING.md
 # 注意：git checkout -- <file> 是一个危险的命令，你对那个文件在本地的任何修改都会消失，会用最近提交的版本覆盖掉它
 ```
 
-
-
-------
-
+***
 
 ## 2.5 远程仓库的使用
 
 远程仓库的特点：
 
-- 托管在网络中的你的项目的版本库
-- 可以有多个远程仓库
-- 通常有些仓库对你只读，有些则可以读写
-- 与他人协作涉及管理远程仓库 以及 根据需要推送或拉取数据
+* 托管在网络中的你的项目的版本库
+* 可以有多个远程仓库
+* 通常有些仓库对你只读，有些则可以读写
+* 与他人协作涉及管理远程仓库 以及 根据需要推送或拉取数据
 
 管理远程仓库包括：
 
-- 了解如何添加远程仓库
-- 移除无效的远程仓库
-- 管理不同的远程分支
-
-
+* 了解如何添加远程仓库
+* 移除无效的远程仓库
+* 管理不同的远程分支
 
 ### 2.5.1 远程仓库的各种操作
 
@@ -350,8 +324,6 @@ git remote rename <old_name> <new_name>
 git remote rm <origin>
 ```
 
-
-
 ### 2.5.2 更新代码时 fetch和pull区别
 
 ```shell
@@ -362,8 +334,6 @@ git remote rm <origin>
 
 `git pull` 会做 `git fetch` 同样的工作，此外还会将远程分支直接合并到本地分支
 ```
-
-
 
 ## 2.6 打标签-tag
 
@@ -387,8 +357,6 @@ git tag -d v1.0.0
 # git push <remote> :refs/tags/<tagname> 或者 git push origin --delete <tagname>
 git push origin :refs/tags/v1.0.0
 ```
-
-
 
 ## 2.7 Git 命令替换为别名
 
@@ -414,5 +382,4 @@ git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
 ```
 
-文章推荐 [细读 Git | 让你弄懂 origin、HEAD、FETCH_HEAD 相关内容 - 简书](https://www.jianshu.com/p/b494ee197ea8)
-
+文章推荐 [细读 Git | 让你弄懂 origin、HEAD、FETCH\_HEAD 相关内容 - 简书](https://www.jianshu.com/p/b494ee197ea8)

@@ -1,27 +1,25 @@
 # Task 03 python与word
 
-- [Task 03 python与word](#task-03-python与word)
-  - [3.0 课前准备](#30-课前准备)
-  - [3.1.知识要点](#31知识要点)
-    - [3.1.1 初步认识docx](#311-初步认识docx)
-    - [3.1.2 整体页面结构介绍](#312-整体页面结构介绍)
-    - [3.1.2字体设置](#312字体设置)
-    - [3.1.3插入图片与表格](#313插入图片与表格)
-    - [3.1.4设置页眉页脚](#314设置页眉页脚)
-    - [3.1.5代码延伸](#315代码延伸)
-  - [3.2 项目实践](#32-项目实践)
-    - [3.2.1需求](#321需求)
-    - [3.2.2需求分析](#322需求分析)
-    - [3.2.3代码](#323代码)
-  - [3.3 后记](#33-后记)
-
-
+* [Task 03 python与word](python与word.md#task-03-python与word)
+  * [3.0 课前准备](python与word.md#30-课前准备)
+  * [3.1.知识要点](python与word.md#31知识要点)
+    * [3.1.1 初步认识docx](python与word.md#311-初步认识docx)
+    * [3.1.2 整体页面结构介绍](python与word.md#312-整体页面结构介绍)
+    * [3.1.2字体设置](python与word.md#312字体设置)
+    * [3.1.3插入图片与表格](python与word.md#313插入图片与表格)
+    * [3.1.4设置页眉页脚](python与word.md#314设置页眉页脚)
+    * [3.1.5代码延伸](python与word.md#315代码延伸)
+  * [3.2 项目实践](python与word.md#32-项目实践)
+    * [3.2.1需求](python与word.md#321需求)
+    * [3.2.2需求分析](python与word.md#322需求分析)
+    * [3.2.3代码](python与word.md#323代码)
+  * [3.3 后记](python与word.md#33-后记)
 
 ## 3.0 课前准备
 
-> python 处理 Word 需要用到 python-docx 库，需要注意的是pythonn-docx不支持doc文档，终端执行如下安装命令： 
+> python 处理 Word 需要用到 python-docx 库，需要注意的是pythonn-docx不支持doc文档，终端执行如下安装命令：
 
-```pyhton
+```
 pip3 install python-docx
 或
 conda install python-docx
@@ -29,24 +27,21 @@ conda install python-docx
 
 > 或在pycharm的setting操作安装（示意如下）：
 
- ![](.\图片\3.1.png)
-
-
+![](../Task03-Python%E4%B8%8EWord%E5%92%8CPDF/%E5%9B%BE%E7%89%87/3.1.png)
 
 ## 3.1.知识要点
 
- 项目难度：⭐ 
+项目难度：⭐
 
 > 说明：
+>
 > 1. 通过小试牛刀初步认识docx，然后系统学习python对word的操作；
 > 2. 预估每个知识点需要讲解的时间；
 > 3. 研发逻辑就是讲解逻辑，一般从上往下，遵循：`What - Why - How` 或 `Why - What - How` 思路；
 
-
-
 ### 3.1.1 初步认识docx
 
- 相信同学们都进行过word的操作。话不多说，直接上python对word简单操作的代码，先有个直观的感觉，然后再系统学习！
+相信同学们都进行过word的操作。话不多说，直接上python对word简单操作的代码，先有个直观的感觉，然后再系统学习！
 
 ```python
 # 导入库
@@ -83,22 +78,22 @@ paragraph_3 = doc_1.add_paragraph('这是第二页第一段文字！')
 doc_1.save('doc_1.docx')
 ```
 
----
+***
 
 上节只是小试牛刀一下，接下来我们系统地学习python自动化之word操作。
 
-在操作之前，我们需要了解 Word 文档的<font color=red>页面结构</font> ：
+在操作之前，我们需要了解 Word 文档的页面结构 ：
 
-- 文档 - Document
-- 段落 - Paragraph
-- 文字块 - Run
+* 文档 - Document
+* 段落 - Paragraph
+* 文字块 - Run
 
-**`python-docx`**将整个文章看做是一个**`Document`**对象 ，其基本结构如下：
+\*\*`python-docx`**将整个文章看做是一个**`Document`\*\*对象 ，其基本结构如下：
 
-- 每个**`Document`**包含许多个代表“段落”的**`Paragraph`**对象，存放在**`document.paragraphs`**中。
-- 每个**`Paragraph`**都有许多个代表"行内元素"的**`Run`**对象，存放在**`paragraph.runs`**中。
+* 每个\*\*`Document`**包含许多个代表“段落”的**`Paragraph`**对象，存放在**`document.paragraphs`\*\*中。
+* 每个\*\*`Paragraph`**都有许多个代表"行内元素"的**`Run`**对象，存放在**`paragraph.runs`\*\*中。
 
-在**`python-docx`**中，**`run`**是最基本的单位，每个**`run`**对象内的文本样式都是一致的，也就是说，在从**`docx`**文件生成文档对象时，**`python-docx`**会根据样式的变化来将文本切分为一个个的`Run`对象。
+在\*\*`python-docx`**中，**`run`**是最基本的单位，每个**`run`**对象内的文本样式都是一致的，也就是说，在从**`docx`**文件生成文档对象时，**`python-docx`\*\*会根据样式的变化来将文本切分为一个个的`Run`对象。
 
 ### 3.1.2 整体页面结构介绍
 
@@ -159,7 +154,8 @@ print(paragraph_1.runs[0].text)  # 查看对应run对象的文本等属性
 # 保存文件（当前目录下）
 doc_1.save('周杰伦.docx')
 ```
-通过上例我们可以看到，最小的操作对象为文字块，通过run的指定进行操作。比如字号，颜色等；而再上一个层级--段落是的格式是通过paragraph_format进行设置；
+
+通过上例我们可以看到，最小的操作对象为文字块，通过run的指定进行操作。比如字号，颜色等；而再上一个层级--段落是的格式是通过paragraph\_format进行设置；
 
 ### 3.1.2字体设置
 
@@ -225,7 +221,6 @@ font_setting(doc,b,'华文中宋')
 font_setting(doc,c,'黑体')
 
 doc.save('字体设置2.docx')
-
 ```
 
 我们很容易地看出来，字体设置1.py与字体设置2.py的区别在于是否为同一段落，同时字体设置2.py中自定义了一个函数。同学们可以在实际工作中看具体场景进行选择。
@@ -257,7 +252,6 @@ row_cells = table1.add_row().cells
 row_cells[0].text = '加油'
 
 doc_1.save('周杰伦为营口加油.docx')
-
 ```
 
 ### 3.1.4设置页眉页脚
@@ -309,7 +303,7 @@ document.save('页眉页脚1.docx') # 保存文档
 
 结果如下：
 
- ![](.\图片\3.2.png)
+![](../Task03-Python%E4%B8%8EWord%E5%92%8CPDF/%E5%9B%BE%E7%89%87/3.2.png)
 
 ### 3.1.5代码延伸
 
@@ -364,35 +358,32 @@ from docx.shared import RGBColor,Pt
 #superscript  :上标
 #underline  :下划线
 
-
 ```
 
 ## 3.2 项目实践
 
- 项目难度：⭐ ⭐ ⭐ 
+项目难度：⭐ ⭐ ⭐
 
 ### 3.2.1需求
 
->  你是公司的行政人员，对合作伙伴进行邀请，参加公司的会议；
+> 你是公司的行政人员，对合作伙伴进行邀请，参加公司的会议；
 >
->  参会人名单如下：
+> 参会人名单如下：
 
- ![](.\图片\3.3.png)
+![](../Task03-Python%E4%B8%8EWord%E5%92%8CPDF/%E5%9B%BE%E7%89%87/3.3.png)
 
 拟定的邀请函样式如下：
 
- ![](.\图片\3.4.png)
+![](../Task03-Python%E4%B8%8EWord%E5%92%8CPDF/%E5%9B%BE%E7%89%87/3.4.png)
 
 **根据参会人名单，利用python批量生成邀请函。**
-
-
 
 ### 3.2.2需求分析
 
 > 逻辑相对简单：
 >
-> - 获取 Excel 文件中每一行的信息，提取 参数；结合获取的参数设计邀请函样式并输出
-> - 设计word段落及字体等样式。
+> * 获取 Excel 文件中每一行的信息，提取 参数；结合获取的参数设计邀请函样式并输出
+> * 设计word段落及字体等样式。
 
 ### 3.2.3代码
 
@@ -480,4 +471,3 @@ for row in sheet.rows:
 ## 3.3 后记
 
 > 本案例也可适用于批量生产固定格式的word，如工资条，通知单等，面对这种相似且重复的任务，python的自动化运行能大幅提升当前的工作效率。
-

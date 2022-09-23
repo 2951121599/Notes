@@ -1,6 +1,6 @@
-# 04_GitFlow工作流实战
+# 04\_GitFlow工作流实战
 
-[TOC]
+\[TOC]
 
 ## 4.0 引言
 
@@ -10,70 +10,58 @@
 
 （注：不同的公司或者不同的项目的GitFlow工作流模型标准也不同，具体以实际应用为准；本文提供的为常用模板，较为全面和通用，建议多加练习，达到熟练掌握的程度）
 
-
-
 ## 4.1 深⼊理解Git-Flow⼯作流模型原理
 
-- Git-Flow模型解决什么问题? 
+*   Git-Flow模型解决什么问题?
 
-  为了解决实际项⽬中代码开发、代码测试、bug修复、版本发布等⼀系过程列严重耦合从⽽产⽣各种问题，如冲突过度、版本混乱。
+    为了解决实际项⽬中代码开发、代码测试、bug修复、版本发布等⼀系过程列严重耦合从⽽产⽣各种问题，如冲突过度、版本混乱。
+*   Git-Flow模型⼜是如何解决上述问题的呢?
 
-- Git-Flow模型⼜是如何解决上述问题的呢? 
-
-  基于Git定义5种类型的分⽀，各分⽀严格定义其指责、起⽌点等，从⽽使开发、测试、发版等过程有条不紊进⾏。
-
+    基于Git定义5种类型的分⽀，各分⽀严格定义其指责、起⽌点等，从⽽使开发、测试、发版等过程有条不紊进⾏。
 
 ### 4.1.1 Git-Flow流程图：
 
 该流程图完整描述Git-Flow模型处理过程，当我们深⼊理解各分⽀，然后结合项⽬阶段与⾃身的⻆⾊（开发/测试/项⽬经理），就会发现每个角色在某个阶段需要关注的可能也就⼀两个分⽀，⽐如在开发阶段，开发⼈员只需关注⾃⼰的新功能分⽀（Feature分支）；release阶段，测试⼈员和开发⼈员都只需关注Release分⽀，各⾃的职责有所差异⽽已
 
-<img src="./images/gitflow2.png" style="zoom:75%;" />
+![](../Git/images/gitflow2.png)
 
+### 4.1.2 Git-Flow各分⽀的说明
 
+|          分⽀名称          | 作⽤                       | ⽣命周期        | 提交or合并                                          | 起⽌点                                  |
+| :--------------------: | ------------------------ | ----------- | ----------------------------------------------- | ------------------------------------ |
+|        Feature分⽀       | ⽤于某个功能                   | 临时分⽀、开发阶段   | 可提交代码                                           | 由Develop分⽀产⽣，最终合并到Develop分⽀          |
+|        Develop分⽀       | 记录历史开发功能                 | 贯穿整个项⽬      | 不能提交，由Feature分⽀、Bugfix分⽀、Release分⽀、Hotfix分⽀合并代码 | 整个项⽬                                 |
+|        Release分⽀       | ⽤于本次Release 如⽂档、测试、bug修复 | 临时分⽀、发版阶段   | 可提交代码                                           | 由Develop分⽀产⽣，最终合并到Develop分⽀和Master分支 |
+|     Hotfix（修补程序）分⽀     | ⽤于解决线上bug                | 临时分⽀、紧急修复阶段 | 可提交代码                                           | 由master分⽀产⽣，最终合并到Develop分⽀和Master分支  |
+| Master（Production生产）分⽀ | 记录历史发布版本                 | 贯穿整个 项⽬     | 不能提交，由Release、Hotfix分⽀合并代码                      | 整个项⽬                                 |
 
-### 4.1.2 Git-Flow各分⽀的说明 
+### 4.1.3 不同⻆度理解各分⽀
 
-|           分⽀名称           | 作⽤                                  | ⽣命周期               | 提交or合并                                                   | 起⽌点                                               |
-| :--------------------------: | ------------------------------------- | ---------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
-|         Feature分⽀          | ⽤于某个功能                          | 临时分⽀、开发阶段     | 可提交代码                                                   | 由Develop分⽀产⽣，最终合并到Develop分⽀             |
-|         Develop分⽀          | 记录历史开发功能                      | 贯穿整个项⽬           | 不能提交，由Feature分⽀、Bugfix分⽀、Release分⽀、Hotfix分⽀合并代码 | 整个项⽬                                             |
-|         Release分⽀          | ⽤于本次Release 如⽂档、测试、bug修复 | 临时分⽀、发版阶段     | 可提交代码                                                   | 由Develop分⽀产⽣，最终合并到Develop分⽀和Master分支 |
-|    Hotfix（修补程序）分⽀    | ⽤于解决线上bug                       | 临时分⽀、紧急修复阶段 | 可提交代码                                                   | 由master分⽀产⽣，最终合并到Develop分⽀和Master分支  |
-| Master（Production生产）分⽀ | 记录历史发布版本                      | 贯穿整个 项⽬          | 不能提交，由Release、Hotfix分⽀合并代码                      | 整个项⽬                                             |
+*   ⽣命周期
 
+    Master分⽀和Develop分⽀贯穿项⽬；其他分⽀均为承担特定指责的临时分⽀。
+*   项⽬阶段
 
+    开发阶段 主要涉及Feature分⽀、Develop分⽀
 
-### 4.1.3 不同⻆度理解各分⽀ 
+    发布阶段 主要涉及Release分⽀、Production分⽀、Develop分⽀
 
-- ⽣命周期 
+    紧急修复阶段 主要涉及Hotfix分⽀、Production分⽀、Develop分⽀
+*   成员关注点
 
-  Master分⽀和Develop分⽀贯穿项⽬；其他分⽀均为承担特定指责的临时分⽀。 
+    开发⼈员 关注 Develop分⽀、Feature分⽀以及特殊阶段关注Hotfix、Release分⽀的bug修复
 
-- 项⽬阶段 
+    测试⼈员 关注 Release分⽀、Hotfix分⽀的功能测试
 
-  开发阶段 主要涉及Feature分⽀、Develop分⽀
-
-  发布阶段 主要涉及Release分⽀、Production分⽀、Develop分⽀
-
-  紧急修复阶段 主要涉及Hotfix分⽀、Production分⽀、Develop分⽀
-
-- 成员关注点 
-
-  开发⼈员 关注 Develop分⽀、Feature分⽀以及特殊阶段关注Hotfix、Release分⽀的bug修复
-  
-  测试⼈员 关注 Release分⽀、Hotfix分⽀的功能测试
-  
-  项⽬经理 关注 Production分⽀、Release分⽀
+    项⽬经理 关注 Production分⽀、Release分⽀
 
 另外要说明，项⽬阶段在时间纬度有可能重叠。⽐如：Release阶段（当前版本）与下各版本的开发阶段可同时存在，因为当前Release阶段的发起同时也就意味着下⼀个Release的开发阶段的开始；⼀旦线上出现bug(任何时候都可能出现)，紧急修复阶段就可能与开发阶段、发版阶段重叠。因此，要求团队成员都要理解Git-Flow⼯作流，以及⾃身所处的项⽬阶段。
 
-
-
-## 4.2 命令行演示⼀个完整的Git-Flow流程 
+## 4.2 命令行演示⼀个完整的Git-Flow流程
 
 实践⼀个从功能开发到版本发布的完整的流程，感受⼀下Git-Flow的具体操作。
 
-> 特此说明，以下shell命令是在win10环境下，'D:\Github_Repository\GitFlow' 目录，使用git bash工具进行演示；‘\$’ 符号所在行为演示命令，如有内容输出，会在‘\$’ 符号所在行的下面输出。
+> 特此说明，以下shell命令是在win10环境下，'D:\Github\_Repository\GitFlow' 目录，使用git bash工具进行演示；‘$’ 符号所在行为演示命令，如有内容输出，会在‘$’ 符号所在行的下面输出。
 
 ### 4.2.1 初始化项⽬，创建Develop分⽀
 
@@ -105,8 +93,6 @@ $ git commit -m "init"
 $ git checkout -b develop master
 Switched to a new branch 'develop'
 ```
-
-
 
 ### 4.2.2 模拟开发阶段过程
 
@@ -178,8 +164,6 @@ $ git branch -d feature-login
 Deleted branch feature-login (was 9175e4d).
 ```
 
-
-
 ### 4.2.3 模拟Release阶段过程
 
 创建Release分⽀、进⾏bug修复、合并到Production分⽀与Develop分⽀
@@ -236,10 +220,7 @@ Merge made by the 'ort' strategy.
 29511@Taylor MINGW64 /d/Github_Repository/GitFlow/gitflow_demo (develop)
 $ git branch -d release-v0.1
 Deleted branch release-v0.1 (was cce8e38).
-
 ```
-
-
 
 ### 4.2.4 模拟线上故障，创建Hotfix分⽀
 
@@ -307,6 +288,3 @@ Merge made by the 'ort' strategy.
 $ git branch -d hotfix-v0.1.1
 Deleted branch hotfix-v0.1.1 (was 2f7470b).
 ```
-
-
-
